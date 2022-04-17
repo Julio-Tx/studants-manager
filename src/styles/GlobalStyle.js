@@ -24,9 +24,14 @@ button {
   color: #fff;
   padding: 10px 20px;
   font-weight: 700;
+  transition: all 300ms;
+}
+button:hover {
+  filter: brightness(120%);
 }
 a {
   text-decoration: none;
+  font-weight: bold;
   color: ${colors.primaryColor};
 }
 ul {
@@ -39,9 +44,9 @@ body .Toastify .Toastify__toast-container .Toastify__toast--success {
 `;
 
 export const Container = styled.section`
-  max-width: 300px;
+  max-width: 600px;
   background: white;
-  margin: 30px;
+  margin: 30px auto;
   padding: 30px;
   border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);

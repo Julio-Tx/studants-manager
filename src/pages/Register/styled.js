@@ -6,15 +6,18 @@ export const Form = styled.form`
   flex-direction: column;
 
   label {
+    margin: 10px 0px;
+    font-weight: 100;
     display: flex;
     flex-direction: column;
-    margin: 10px 0px 5px 0px;
   }
   input {
-    margin-top: 5px;
     height: 35px;
-    padding-left: 8px;
+    margin-top: 3px;
+    padding-left: 5px;
     border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
     border-radius: 3px;
 
     &:focus {
@@ -24,16 +27,5 @@ export const Form = styled.form`
   }
   button {
     margin-top: 10px;
-  }
-`;
-export const Span = styled.span`
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-  margin-bottom: -10px;
-  justify-content: center;
-
-  Link {
-    font-weight: bold;
   }
 `;
