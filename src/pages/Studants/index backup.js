@@ -3,47 +3,29 @@ import { get } from 'lodash';
 import { FaUserCircle, FaEdit, FaWindowClose } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-import { StudantContainer, ProfilePicture, Form } from './styled';
+import { StudantContainer, ProfilePicture } from './styled';
 import { Container } from '../../styles/GlobalStyle';
 import axios from '../../services/axios';
-// import Loading from '../../components/Loading';
+import Loading from '../../components/Loading';
 
 export default function Studants() {
   const [studants, setStudants] = useState([]);
-  const [search, setSearch] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function getData() {
-      // setIsLoading(true);
+      setIsLoading(true);
       const response = await axios.get('/alunos');
       setStudants(response.data);
-      // setIsLoading(false);
+      setIsLoading(false);
     }
-    async function getStudant() {
-      const response = await axios.get(`/alunos/${search}`);
-      setStudants(response.data);
-    }
-    if (!search) {
-      getData();
-    } else {
-      getStudant();
-    }
-  }, [search]);
+    getData();
+  }, []);
 
   return (
     <Container>
+      <Loading isLoading={isLoading} />
       <h1>Studants</h1>
-      <Form>
-        <label htmlFor="search">
-          Search studant:
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </label>
-      </Form>
       <StudantContainer>
         {studants.map((studant) => (
           <div key={String(studant.id)}>

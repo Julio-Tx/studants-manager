@@ -6,9 +6,9 @@ import { useSelector } from 'react-redux';
 import { Nav } from './styled';
 
 export default function Header() {
-  const id = useSelector((state) => state.auth.user.id);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-  if (!id) {
+  if (!isLoggedIn) {
     return (
       <Nav>
         <Link to="/">
