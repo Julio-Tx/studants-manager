@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import * as colors from '../../config/colors';
 
 export const StudantContainer = styled.div`
@@ -51,4 +52,9 @@ export const Form = styled.div`
   button {
     margin-top: 0px;
   }
+`;
+
+export const NewStudant = styled(Link)`
+  padding: 20px 0px 10px 0px;
+  display: block;
 `;

@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { get } from 'lodash';
-import { FaUserCircle, FaEdit, FaWindowClose } from 'react-icons/fa';
+import { FaUserCircle, FaEdit } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-import { StudantContainer, ProfilePicture, Form } from './styled';
+import { StudantContainer, ProfilePicture, Form, NewStudant } from './styled';
 import { Container } from '../../styles/GlobalStyle';
 import axios from '../../services/axios';
-// import Loading from '../../components/Loading';
+import Loading from '../../components/Loading';
 
 export default function Studants() {
   const [studants, setStudants] = useState([]);
   const [search, setSearch] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function getData() {
-      // setIsLoading(true);
+      setIsLoading(true);
       const response = await axios.get('/alunos');
       setStudants(response.data);
-      // setIsLoading(false);
+      setIsLoading(false);
     }
     async function getStudant() {
       const response = await axios.get(`/alunos/${search}`);
@@ -33,7 +33,9 @@ export default function Studants() {
 
   return (
     <Container>
+      <Loading isLoading={isLoading} />
       <h1>Studants</h1>
+      <NewStudant to="/studant">New Studant</NewStudant>
       <Form>
         <label htmlFor="search">
           Search studant:
@@ -58,9 +60,6 @@ export default function Studants() {
             <span>{studant.email} </span>
             <Link to={`/studant/${studant.id}/edit`}>
               <FaEdit size={20} />
-            </Link>
-            <Link to={`/studant/${studant.id}/delete`}>
-              <FaWindowClose size={20} />
             </Link>
           </div>
         ))}
