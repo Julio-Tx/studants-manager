@@ -45,3 +45,15 @@ export const Form = styled.form`
     margin-top: 20px;
   }
 `;
+export const ProfilePicture = styled.div`
+  margin: -10px 0px 15px 410px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  box-shadow: 0px 0px 3px #000000;
+  img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+  }
+`;

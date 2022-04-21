@@ -56,5 +56,6 @@ export const Form = styled.div`
 
 export const NewStudant = styled(Link)`
   padding: 20px 0px 10px 0px;
+  margin: -30px 0px 0px 440px;
   display: block;
 `;

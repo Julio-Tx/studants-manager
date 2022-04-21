@@ -1,20 +1,30 @@
 import { get } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import { FaUserCircle, FaEdit } from 'react-icons/fa';
+
+import { Link } from 'react-router-dom';
 import history from '../../services/history';
-import { Form } from './styled';
+import { Form, ProfilePicture } from './styled';
 import { Container } from '../../styles/GlobalStyle';
+import Loading from '../../components/Loading';
 import axios from '../../services/axios';
+import * as actions from '../../store/modules/auth/actions';
 
 export default function Studant({ match }) {
+  const dispatch = useDispatch();
+
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [age, setAge] = useState('');
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
+  const [foto, setFoto] = useState('');
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [hide, setHide] = useState(false);
   const [sure, setSure] = useState(false);
@@ -23,7 +33,32 @@ export default function Studant({ match }) {
 
   useEffect(() => {
     if (!id) setHide(true);
-  });
+
+    async function getData() {
+      try {
+        setIsLoading(true);
+        const response = await axios.get(`/aluno/${id}`);
+        const Foto = get(response.data, 'Fotos[0].url', '');
+        setName(response.data.nome);
+        setSurname(response.data.sobrenome);
+        setEmail(response.data.email);
+        setAge(response.data.idade);
+        setWeight(response.data.peso);
+        setHeight(response.data.altura);
+        setFoto(Foto);
+
+        setIsLoading(false);
+      } catch (err) {
+        const errors = get(err, 'response.data.errors', []);
+        errors.map((error) => toast.error(error));
+        history.push('/');
+      }
+    }
+
+    if (id) {
+      getData();
+    }
+  }, [id]);
 
   const handleDeleteAsk = (e) => {
     e.preventDefault();
@@ -41,11 +76,67 @@ export default function Studant({ match }) {
     }
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setIsLoading(true);
+      if (id) {
+        await axios.put(`/alunos/${id}`, {
+          nome: name,
+          sobrenome: surname,
+          email,
+          idade: age,
+          peso: weight,
+          altura: height,
+        });
+        toast.success('User updated.');
+        history.push('/');
+      } else {
+        await axios.post(`/alunos/`, {
+          name,
+          surname,
+          email,
+          age,
+          weight,
+          height,
+        });
+        toast.success('User updated.');
+        history.push('/');
+      }
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+      const status = get(err, 'response.status', 0);
+      const data = get(err, 'response.data', {});
+      const errors = get(data, 'errors', []);
+
+      if (errors.length > 0) {
+        errors.map((error) => toast.error(error));
+      } else {
+        toast.error('Unknow error');
+      }
+
+      if (status === 401) dispatch(actions.loginFailure());
+    }
+  };
+
   return (
     <Container>
+      <Loading isLoading={isLoading} />
       <h1>{id ? 'Edit studant' : 'Register studant'}</h1>
 
-      <Form>
+      <ProfilePicture>
+        {id ? (
+          <img src={foto} alt="profile user" />
+        ) : (
+          <FaUserCircle size={120} />
+        )}
+        <Link to={`/photos/${id}`}>
+          <FaEdit size={20} />
+        </Link>
+      </ProfilePicture>
+
+      <Form onSubmit={handleSubmit}>
         <label htmlFor="name">
           Name:
           <input
