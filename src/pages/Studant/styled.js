@@ -46,7 +46,7 @@ export const Form = styled.form`
   }
 `;
 export const ProfilePicture = styled.div`
-  margin: -10px 0px 15px 410px;
+  margin: 10px 0px 50px 230px;
   width: 120px;
   height: 120px;
   border-radius: 50%;
@@ -55,5 +55,8 @@ export const ProfilePicture = styled.div`
     width: 120px;
     height: 120px;
     border-radius: 50%;
+  }
+  input {
+    margin: 15px 0px 0px -90px;
   }
 `;

@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import { FaUserCircle, FaEdit } from 'react-icons/fa';
+import { FaUserCircle } from 'react-icons/fa';
 
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import history from '../../services/history';
 import { Form, ProfilePicture } from './styled';
 import { Container } from '../../styles/GlobalStyle';
@@ -22,7 +22,7 @@ export default function Studant({ match }) {
   const [age, setAge] = useState('');
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
-  const [foto, setFoto] = useState('');
+  const [photo, setPhoto] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -38,14 +38,14 @@ export default function Studant({ match }) {
       try {
         setIsLoading(true);
         const response = await axios.get(`/aluno/${id}`);
-        const Foto = get(response.data, 'Fotos[0].url', '');
+        const Photo = get(response.data, 'Fotos[0].url', '');
         setName(response.data.nome);
         setSurname(response.data.sobrenome);
         setEmail(response.data.email);
         setAge(response.data.idade);
         setWeight(response.data.peso);
         setHeight(response.data.altura);
-        setFoto(Foto);
+        setPhoto(Photo);
 
         setIsLoading(false);
       } catch (err) {
@@ -59,6 +59,37 @@ export default function Studant({ match }) {
       getData();
     }
   }, [id]);
+
+  const handlePhotoChange = async (e) => {
+    const file = e.target.files[0];
+    const fileURL = URL.createObjectURL(file);
+
+    setPhoto(fileURL);
+
+    const formData = new FormData();
+    formData.append('aluno_id', id);
+    formData.append('foto', file);
+
+    try {
+      setIsLoading(true);
+
+      await axios.post('/fotos/', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      toast.success('Photo updated.');
+
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+      const { status } = get(err, 'response', '');
+      toast.error('Error uploading image');
+
+      if (status === 401) dispatch(actions.loginFailure());
+    }
+  };
 
   const handleDeleteAsk = (e) => {
     e.preventDefault();
@@ -124,17 +155,18 @@ export default function Studant({ match }) {
     <Container>
       <Loading isLoading={isLoading} />
       <h1>{id ? 'Edit studant' : 'Register studant'}</h1>
-
-      <ProfilePicture>
-        {id ? (
-          <img src={foto} alt="profile user" />
-        ) : (
-          <FaUserCircle size={120} />
-        )}
-        <Link to={`/photos/${id}`}>
-          <FaEdit size={20} />
-        </Link>
-      </ProfilePicture>
+      {id ? (
+        <ProfilePicture>
+          {photo ? (
+            <img src={photo} alt="profile user" />
+          ) : (
+            <FaUserCircle size={120} />
+          )}
+          <input type="file" id="photo" onChange={handlePhotoChange} />
+        </ProfilePicture>
+      ) : (
+        <div />
+      )}
 
       <Form onSubmit={handleSubmit}>
         <label htmlFor="name">
@@ -158,7 +190,7 @@ export default function Studant({ match }) {
         <label htmlFor="email">
           Email:
           <input
-            type="text"
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Studant's email"
@@ -167,7 +199,7 @@ export default function Studant({ match }) {
         <label htmlFor="age">
           Age:
           <input
-            type="text"
+            type="number"
             value={age}
             onChange={(e) => setAge(e.target.value)}
             placeholder="Studant's age"
@@ -176,7 +208,7 @@ export default function Studant({ match }) {
         <label htmlFor="weight">
           Weight:
           <input
-            type="text"
+            type="number"
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
             placeholder="Studant's weight"
@@ -185,7 +217,7 @@ export default function Studant({ match }) {
         <label htmlFor="height">
           Height:
           <input
-            type="text"
+            type="number"
             value={height}
             onChange={(e) => setHeight(e.target.value)}
             placeholder="Studant's height"
