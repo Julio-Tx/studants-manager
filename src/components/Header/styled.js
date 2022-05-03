@@ -3,7 +3,7 @@ import { primaryColor } from '../../config/colors';
 
 export const Nav = styled.nav`
   background-color: ${primaryColor};
-  padding: 20px;
+  padding: 20px 20px 0px 20px;
   align-content: center;
   display: flex;
 

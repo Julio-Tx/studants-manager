@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { FaUserCircle } from 'react-icons/fa';
+import { isEmail, isInt, isFloat } from 'validator';
 
 // import { Link } from 'react-router-dom';
 import history from '../../services/history';
@@ -109,6 +110,40 @@ export default function Studant({ match }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let formErrors = false;
+
+    if (name.length < 3 || name.length > 255) {
+      toast.error('Nome precisa ter entre 3 e 255 caracteres');
+      formErrors = true;
+    }
+
+    if (surname.length < 3 || surname.length > 255) {
+      toast.error('Sobrenome precisa ter entre 3 e 255 caracteres');
+      formErrors = true;
+    }
+
+    if (!isEmail(email)) {
+      toast.error('E-mail inválido');
+      formErrors = true;
+    }
+
+    if (!isInt(String(age))) {
+      toast.error('Idade inválida');
+      formErrors = true;
+    }
+
+    if (!isFloat(String(weight))) {
+      toast.error('Peso inválido');
+      formErrors = true;
+    }
+
+    if (!isFloat(String(height))) {
+      toast.error('Altura inválida');
+      formErrors = true;
+    }
+
+    if (formErrors) return;
+
     try {
       setIsLoading(true);
       if (id) {
@@ -124,12 +159,12 @@ export default function Studant({ match }) {
         history.push('/');
       } else {
         await axios.post(`/alunos/`, {
-          name,
-          surname,
+          nome: name,
+          sobrenome: surname,
           email,
-          age,
-          weight,
-          height,
+          idade: age,
+          peso: weight,
+          altura: height,
         });
         toast.success('User updated.');
         history.push('/');

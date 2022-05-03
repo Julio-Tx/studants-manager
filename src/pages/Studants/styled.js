@@ -59,3 +59,7 @@ export const NewStudant = styled(Link)`
   margin: -30px 0px 0px 440px;
   display: block;
 `;
+
+export const Paginate = styled.div`
+  margin-top: 40px;
+`;
