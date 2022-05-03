@@ -12,7 +12,7 @@ Update user page:
 ![update-user](https://user-images.githubusercontent.com/89145009/165586168-c2589fee-b181-470c-8cba-a0b164a112af.png)
 
 Index page:
-![index](https://user-images.githubusercontent.com/89145009/165585766-dd55009c-d84c-46c7-92cc-4536b4816b89.png)
+![index novo](https://user-images.githubusercontent.com/89145009/166505220-f7de959e-1ad4-4c42-9828-fcdda2fc88d9.png)
 
 New studant page:
 ![new-studant](https://user-images.githubusercontent.com/89145009/165585985-c2b5b94c-3404-4fc6-a39e-4b4107707f9e.png)
