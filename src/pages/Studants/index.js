@@ -10,6 +10,7 @@ import {
   Form,
   NewStudant,
   Paginate,
+  Title,
 } from './styled';
 import { Container } from '../../styles/GlobalStyle';
 import axios from '../../services/axios';
@@ -55,7 +56,7 @@ export default function Studants() {
   return (
     <Container>
       <Loading isLoading={isLoading} />
-      <h1>Studants</h1>
+      <Title>Studants</Title>
       <NewStudant to="/studant">New Studant</NewStudant>
       <Form>
         <label htmlFor="search">
@@ -68,22 +69,44 @@ export default function Studants() {
         </label>
       </Form>
       <StudantContainer>
-        {studants.map((studant) => (
-          <div key={String(studant.id)}>
-            <ProfilePicture>
-              {get(studant, 'Fotos[0].url', false) ? (
-                <img src={studant.Fotos[0].url} alt="" />
-              ) : (
-                <FaUserCircle size={36} />
-              )}
-            </ProfilePicture>
-            <span>{studant.nome} </span>
-            <span>{studant.email} </span>
-            <Link to={`/studant/${studant.id}/edit`}>
-              <FaEdit size={20} />
-            </Link>
-          </div>
-        ))}
+        <table className="table table-hover table-bordered">
+          <thead className="thead-light">
+            <tr>
+              <th scope="col">Photo</th>
+              <th scope="col">Name</th>
+              <th scope="col">Surname</th>
+              <th scope="col">E-mail</th>
+              <th scope="col">Age</th>
+              <th scope="col">Weight</th>
+              <th scope="col">Height</th>
+              <th scope="col">Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            {studants.map((studant) => (
+              <tr key={String(studant.id)}>
+                <ProfilePicture>
+                  {get(studant, 'Fotos[0].url', false) ? (
+                    <img src={studant.Fotos[0].url} alt="" />
+                  ) : (
+                    <FaUserCircle size={36} />
+                  )}
+                </ProfilePicture>
+                <td>{studant.nome} </td>
+                <td>{studant.sobrenome} </td>
+                <td>{studant.email} </td>
+                <td>{studant.idade} </td>
+                <td>{studant.peso} </td>
+                <td>{studant.altura} </td>
+                <td>
+                  <Link to={`/studant/${studant.id}/edit`}>
+                    <FaEdit size={20} />
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </StudantContainer>
       <Paginate>
         <ReactPaginate

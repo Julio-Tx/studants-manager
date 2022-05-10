@@ -2,8 +2,18 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import * as colors from '../../config/colors';
 
+export const Title = styled.h1`
+  margin: 20px 0px 20px 50px;
+`;
+
 export const StudantContainer = styled.div`
-  margin-top: 20px;
+  width: 600px;
+  margin: auto;
+  margin-top: 30px;
+  td {
+    text-align: center;
+    vertical-align: center;
+  }
   div {
     display: flex;
     align-items: center;
@@ -23,11 +33,14 @@ export const ProfilePicture = styled.div`
     height: 35px;
     border-radius: 50%;
   }
+  margin-left: 10px;
 `;
 export const Form = styled.div`
   display: flex;
   flex-direction: column;
-
+  margin: auto;
+  margin-left: 71px;
+  width: 616px;
   label {
     margin: 10px 0px;
     font-weight: 100;
@@ -56,7 +69,7 @@ export const Form = styled.div`
 
 export const NewStudant = styled(Link)`
   padding: 20px 0px 10px 0px;
-  margin: -30px 0px 0px 440px;
+  margin: -30px 0px 0px 560px;
   display: block;
 `;
 

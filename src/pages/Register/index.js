@@ -25,6 +25,7 @@ export default function Register() {
 
     setName(nameStored);
     setEmail(emailStored);
+    // eslint-disable-next-line
   }, []);
 
   async function handleSubmit(e) {

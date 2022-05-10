@@ -44,7 +44,7 @@ body .Toastify .Toastify__toast-container .Toastify__toast--success {
 `;
 
 export const Container = styled.section`
-  max-width: 600px;
+  max-width: 800px;
   background: white;
   margin: 30px auto;
   padding: 30px;
