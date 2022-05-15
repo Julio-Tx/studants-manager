@@ -2,6 +2,13 @@
 
 A project to store studants data with back-end REST API (node.js and mariaDB) and front-end with React, React Hooks and Redux.
 
+To run this project on your pc, follow this commands:
+
+npm i
+npm start
+
+Preview:
+
 Register user page:
 ![register-user](https://user-images.githubusercontent.com/89145009/165586113-51a6029f-63c3-43bd-a344-1b115a80f51f.png)
 
@@ -19,4 +26,3 @@ New studant page:
 
 Update studant page:
 ![update-studant](https://user-images.githubusercontent.com/89145009/165586025-99f7441a-833f-4696-9634-39995e53617f.png)
-
