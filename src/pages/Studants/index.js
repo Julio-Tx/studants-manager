@@ -108,27 +108,31 @@ export default function Studants() {
           </tbody>
         </table>
       </StudantContainer>
-      <Paginate>
-        <ReactPaginate
-          previousLabel="Previous"
-          nextLabel="Next"
-          breakLabel="..."
-          pageCount={totalPages}
-          marginPagesDisplayed={3}
-          pageRangeDisplayed={3}
-          onPageChange={handlePageClick}
-          containerClassName="pagination justify-content-center"
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          previousLinkClassName="page-link"
-          nextClassName="page-item"
-          nextLinkClassName="page-link"
-          breakClassName="page-item"
-          breakLinkClassName="page-link"
-          activeClassName="active"
-        />
-      </Paginate>
+      {search.length > 0 ? (
+        <div />
+      ) : (
+        <Paginate>
+          <ReactPaginate
+            previousLabel="Previous"
+            nextLabel="Next"
+            breakLabel="..."
+            pageCount={totalPages}
+            marginPagesDisplayed={3}
+            pageRangeDisplayed={3}
+            onPageChange={handlePageClick}
+            containerClassName="pagination justify-content-center"
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            previousLinkClassName="page-link"
+            nextClassName="page-item"
+            nextLinkClassName="page-link"
+            breakClassName="page-item"
+            breakLinkClassName="page-link"
+            activeClassName="active"
+          />
+        </Paginate>
+      )}
     </Container>
   );
 }

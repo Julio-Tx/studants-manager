@@ -74,5 +74,6 @@ export const NewStudant = styled(Link)`
 `;
 
 export const Paginate = styled.div`
-  margin-top: 40px;
+  margin-top: 25px;
+  margin-bottom: -15px;
 `;
