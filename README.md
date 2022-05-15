@@ -1,6 +1,6 @@
 # Studants Manager Study Project
 
-A project to store studants data with back-end REST API (node.js and mariaDB) and front-end with React, React Hooks and Redux.
+A project to store studants data with back-end REST API (node.js and mariaDB) and front-end with React, React Hooks and Redux
 
 Register user page:
 ![register-user](https://user-images.githubusercontent.com/89145009/165586113-51a6029f-63c3-43bd-a344-1b115a80f51f.png)
