@@ -5,6 +5,7 @@ A project to store studants data with back-end REST API (node.js and mariaDB) an
 To run this project on your pc, follow this commands:
 
 npm i
+
 npm start
 
 Preview:
