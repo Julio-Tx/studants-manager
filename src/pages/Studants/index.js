@@ -92,12 +92,12 @@ export default function Studants() {
                     <FaUserCircle size={36} />
                   )}
                 </ProfilePicture>
-                <td>{studant.nome} </td>
-                <td>{studant.sobrenome} </td>
-                <td>{studant.email} </td>
-                <td>{studant.idade} </td>
-                <td>{studant.peso} </td>
-                <td>{studant.altura} </td>
+                <td>{studant.nome}</td>
+                <td>{studant.sobrenome}</td>
+                <td>{studant.email}</td>
+                <td>{studant.idade}</td>
+                <td>{studant.peso}</td>
+                <td>{studant.altura}</td>
                 <td>
                   <Link to={`/studant/${studant.id}/edit`}>
                     <FaEdit size={20} />
